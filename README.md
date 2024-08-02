@@ -15,6 +15,9 @@
            - Deploy commmand- `firebase deploy`
            - Before deploy build command to create prod build.
 
+# Redux
+- install redux@toolkit and react-redux as prod dependency
+
 # Features
 - Login/Sign Up
      - Sign In /Sign Up Form
