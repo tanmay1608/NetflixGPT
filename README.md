@@ -15,8 +15,18 @@
            - Deploy commmand- `firebase deploy`
            - Before deploy build command to create prod build.
 
-# Redux
-- install redux@toolkit and react-redux as prod dependency
+- Created Redux Store with userSLice
+- Implemented Sign out
+- BugFix: if the user is not logged in Redirect  /browse to Login page and vice-versa
+- Unsubscibed to the onAuthStateChanged callback
+- Regiter TMDB API & create an app & get access token
+- Get Data from TMDB now playing movies list API
+- Custom Hook for Now Playing Movies
+- Create movieSlice
+- Update Store with movies Data
+- Fetch Data for Trailer Video
+- Update Store with Trailer Video Data
+- Embedded the Yotube video and make it autoplay and mute
 
 # Features
 - Login/Sign Up
@@ -31,4 +41,4 @@
                   - MovieList * N
 - NetflixGPT
      - Search Bar
-     - Movie Sugestions                   
+     - Movie Sugestions                    
