@@ -21,7 +21,7 @@ const handleButtonClick=()=>{
 }
 
   return (
-    <div className="fixed px-8 py-2  bg-gradient-to-b from-black w-full  z-20 flex  justify-between items-center" >
+    <div className="fixed top-0 left-0 right-0 px-8 py-2  bg-gradient-to-b from-black w-full  z-50 flex  justify-between items-center" >
       <img className="w-40 " src={LOGO_URL} alt="logo"></img>
 
       {user && <div className="">

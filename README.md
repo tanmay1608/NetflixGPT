@@ -26,7 +26,12 @@
 - Update Store with movies Data
 - Fetch Data for Trailer Video
 - Update Store with Trailer Video Data
-- Embedded the Yotube video and make it autoplay and mute
+- Embedded the Youtube video and make it autoplay and mute
+- Build Secondary Component
+- Build Movie List
+- build Movie Card
+- TMDB Image CDN URL
+- created custom hooks for popularMovies, topRatedMovies, upComingMovies
 
 # Features
 - Login/Sign Up
