@@ -32,6 +32,9 @@
 - build Movie Card
 - TMDB Image CDN URL
 - created custom hooks for popularMovies, topRatedMovies, upComingMovies
+- GPT Search Page
+- GPT Search Bar
+- Multi-language Feature
 
 # Features
 - Login/Sign Up

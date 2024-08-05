@@ -15,4 +15,8 @@ const API_OPTIONS = {
 
 const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500";
 
-export { LOGO_URL, BG_URL, API_OPTIONS, IMG_CDN_URL };
+const SUPPORTED_LANGUAGES=[{
+  identifier:"en",name:"English"
+},
+{identifier:"hindi",name:"Hindi"}];
+export { LOGO_URL, BG_URL, API_OPTIONS, IMG_CDN_URL ,SUPPORTED_LANGUAGES};
