@@ -9,7 +9,7 @@ const API_OPTIONS = {
   headers: {
     accept: "application/json",
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhY2RiZmQ3MmZkYjY1YzY5YzI0ODZiMTQ0MDE4MWI3MyIsIm5iZiI6MTcyMjY5MjI4OS4xMjM2NDksInN1YiI6IjY2YWUzMTc1NGZlNDIxMzEwY2QzMTA2NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.D93X4fGt2fULEH79DRa8G1oN_aMrkTELyUvhbRpdT_E",
+      "Bearer "+process.env.REACT_APP_TMDB_KEY,
   },
 };
 
@@ -19,4 +19,5 @@ const SUPPORTED_LANGUAGES=[{
   identifier:"en",name:"English"
 },
 {identifier:"hindi",name:"Hindi"}];
-export { LOGO_URL, BG_URL, API_OPTIONS, IMG_CDN_URL ,SUPPORTED_LANGUAGES};
+ const OPENAI_KEY="sk-S7ziQQYAgEAZtoM2d22gw5zcV80cg7Rk4SutjOmzQ7T3BlbkFJQyxl2q4WTc6cC-_eRlvww53h6CfAsgU6TJsASEUSoA";
+export { LOGO_URL, BG_URL, API_OPTIONS, IMG_CDN_URL ,SUPPORTED_LANGUAGES,OPENAI_KEY};

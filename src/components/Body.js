@@ -9,6 +9,9 @@ import { addUser, removeUser } from "../store/userSlice";
 import { useDispatch } from "react-redux";
 import PrivateBrowseRoute from "./PrivateBrowseRoute";
 import PrivateLoginRoute from "./PrivateLoginRoute";
+import { clearMovieSlice } from "../store/moviesSlice";
+import { clearConfigSlice } from "../store/configSlice";
+import MovieDetailsPage from "./MovieDetailsPage";
 
 const Body = () => {
   const dispatch = useDispatch();
@@ -33,6 +36,16 @@ const Body = () => {
           element: <Browse />,
         },
       ],
+    },
+    {
+      path: "/browse/:movieId",
+      element: <PrivateBrowseRoute/>,
+      children:[
+        {
+          path: "/browse/:movieId",
+      element: <MovieDetailsPage/>
+        }
+      ]
     },
   ]);
 
@@ -75,6 +88,8 @@ const Body = () => {
         // User is signed out
         dispatch(removeUser());
         clearUserInfo();
+        dispatch(clearMovieSlice());
+        dispatch(clearConfigSlice());
         //if user sign out navigate to main page
         // navigate("/");
       }

@@ -1,9 +1,21 @@
-import React from 'react'
+import {useEffect} from 'react'
 import MovieCard from './MovieCard'
+import { Link } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { showMovieDetails } from '../store/configSlice';
 
 const MoviesList = ({movies,title}) => {
 
-    console.log("Inside MoviesList", movies);
+    // if(movies.length) return null;
+
+  const dispatch=useDispatch();
+    const handleMovieDetails=()=>{
+      dispatch(showMovieDetails(true));
+    }
+
+   
+
+
   return (
     <div className='py-2'>
 
@@ -12,7 +24,7 @@ const MoviesList = ({movies,title}) => {
         <div className='flex overflow-x-scroll scrollbar-none scrollbar-hide'>
             <div className='flex'>
             {movies?.map((movie)=>
-                <MovieCard key={movie?.id} poster_path={movie?.poster_path}/>
+                <Link key={movie?.id} to={"/browse/"+movie.id } onClick={handleMovieDetails}><MovieCard  poster_path={movie?.poster_path}/></Link>
             )}
             </div>
            

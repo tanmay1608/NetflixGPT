@@ -6,10 +6,12 @@ import { auth } from "../utils/firebase";
 import { createUserWithEmailAndPassword , signInWithEmailAndPassword} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
 import { logDOM } from "@testing-library/react";
+import Spinner from "./Spinner";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [loading,setLoading]=useState(false);
   const navigate=useNavigate();
 
   const email = useRef(null);
@@ -17,6 +19,7 @@ const Login = () => {
   const name = useRef(null);
 
   const handleButtonClick = () => {
+    setLoading(true)
     const nameValue = isSignIn ? null : name.current.value;
     const message = checkValidData(
       email.current.value,
@@ -38,6 +41,7 @@ const Login = () => {
           console.log("Inside createUserWithEmailAndPassword")
           const user = userCredential.user;
           console.log(user);
+          setLoading(false);
           navigate("/browse");
          
           
@@ -47,6 +51,7 @@ const Login = () => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(errorCode + ": " + errorMessage);
+          setLoading(false);
         });
     } else {
       //sign In
@@ -56,6 +61,7 @@ const Login = () => {
     // Signed in 
     const user = userCredential.user;
     console.log("Inside signInWithEmailAndPassword")
+    setLoading(false);
     navigate("browse");
     // ...
   })
@@ -63,6 +69,7 @@ const Login = () => {
     const errorCode = error.code;
     const errorMessage = error.message;
     setErrorMessage(errorCode+": "+errorMessage);
+    setLoading(false);
   });
     }
   };
@@ -77,6 +84,7 @@ const Login = () => {
           alt="logo"
         ></img>
       </div>
+      
       <form
         onSubmit={(e) => {
           //so, when we have a button inside form it calls
@@ -85,7 +93,7 @@ const Login = () => {
           // e.preventDefault();
           e.preventDefault();
         }}
-        className="bg-black w-3/12 flex flex-col  absolute top-1/2 transform -translate-y-1/2 p-6 rounded-lg text-white bg-opacity-85"
+        className="w-[325px] max-w-full p:4 bg-black sm:w-[375px] flex flex-col  absolute top-1/2 transform -translate-y-1/2 sm:p-6 rounded-lg text-white bg-opacity-85"
       >
         <h1 className="font-bold text-3xl   mx-9  my-6">
           {isSignIn ? "Sign In" : "Sign Up"}
@@ -113,6 +121,9 @@ const Login = () => {
         {errorMessage !== null && (
           <p className="text-red-600  mx-9 my-3 text-center">{errorMessage}</p>
         )}
+        {
+          (loading && errorMessage==null )  && <Spinner/>
+        }
         <button
           className=" p-4 mx-9 my-3 bg-red-600 font-bold rounded-sm"
           onClick={handleButtonClick}
@@ -120,13 +131,13 @@ const Login = () => {
           {isSignIn ? "Sign In" : "Sign Up"}
         </button>
         <p
-          className=" mx-9 my-2 cursor-pointer"
+          className=" mx-9 my-2 cursor-pointer text-center"
           onClick={() => {
             setIsSignIn(!isSignIn);
             setErrorMessage(null);
           }}
         >
-          <span className="text-gray-400 cursor-pointer">
+          <span className="text-gray-400 cursor-pointer ">
             {isSignIn ? "New to netflix?" : "Already registered?"}
           </span>{" "}
           {isSignIn ? " Sign Up Now" : " Sign In Now"}

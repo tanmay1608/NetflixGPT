@@ -9,13 +9,13 @@ const MainContainer = () => {
     const mainMovie=movies[0];
     console.log(mainMovie);
     const {title,
-        overview,id}=mainMovie;
+        overview,id,poster_path}=mainMovie;
   return (
   
-    <div className=' md:py-0 md:-mt-24 bg-black'>
+    <div className='py-20  mt-24 sm:py-0   md:py-0 lg:-mt-24 bg-black scrollbar-hide w-full'>
      
-      <VideoTitle title={title} overview={overview}/>
-      <VideoBackground movieId={id}/>
+      <VideoTitle title={title} overview={overview} id={id}/>
+      <VideoBackground movieId={id} poster_path={poster_path}/>
     </div>
   )
 }
