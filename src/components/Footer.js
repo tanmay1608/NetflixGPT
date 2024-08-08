@@ -1,18 +1,18 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRocket, faCaretDown, faCaretUp, faHouse } from '@fortawesome/free-solid-svg-icons'
+import { faRocket, faHouse } from '@fortawesome/free-solid-svg-icons'
 import {updateSearchSection} from "../store/configSlice"
 import { toggleGPTSearchView } from "../store/gptSlice";
-import { changeLanguage, toggleDropdown } from "../store/configSlice";
+import { toggleDropdown } from "../store/configSlice";
 import { removeSearchedMovies } from "../store/moviesSlice";
 import { useDispatch, useSelector } from "react-redux";
-import {useNavigate} from "react-router-dom";
+
 
 const Footer = () => {
 
     const showGPTSearch = useSelector((store) => store.gpt?.showGPTSearch);
     const dispatch = useDispatch();
-    const navigate=useNavigate();
+  
     const handleGPTSearchClick = () => {
         if (showGPTSearch) dispatch(removeSearchedMovies());
         dispatch(toggleGPTSearchView());

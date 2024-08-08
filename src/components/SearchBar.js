@@ -1,10 +1,9 @@
 import { useRef } from "react";
 import lang from "../utils/languageConstants";
 import { useDispatch, useSelector } from "react-redux";
-
 import { API_OPTIONS } from "../utils/constants";
 import { addSearchedMovies } from "../store/moviesSlice";
-import { setLoading, toggleSearchClicked } from "../store/configSlice";
+import { setLoading } from "../store/configSlice";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
@@ -12,17 +11,30 @@ const SearchBar = () => {
   const langKey = useSelector((store) => store.config?.lang);
   const dispatch=useDispatch();
   const searchText = useRef(null);
-  console.log(lang[langKey]);
+  
 
   const searchTMDBMovies = async () => {
-    dispatch(setLoading(true));
-    console.log(searchText.current.value);
     
-    const data= await fetch("https://api.themoviedb.org/3/search/movie?query="+searchText.current.value+"&include_adult=false&page=1", API_OPTIONS)
-    const json=await data.json();
 
-    dispatch(addSearchedMovies({movieName:searchText.current.value,movieResult:json.results}));
-    dispatch(setLoading(false));
+    try {
+      dispatch(setLoading(true));
+
+      const data= await fetch("https://api.themoviedb.org/3/search/movie?query="+searchText?.current?.value+"&include_adult=false&page=1", API_OPTIONS)
+
+      
+      if(!data.ok) throw new Error(`HTTP error! status: ${data.status}`)
+
+      const json=await data.json();
+    
+      dispatch(addSearchedMovies({movieName:searchText?.current?.value,movieResult:json?.results}));
+
+      dispatch(setLoading(false));
+  
+     
+    } catch (error) {
+      dispatch(setLoading(false));
+      console.log("error",error);
+    }
 
    
   };
@@ -39,7 +51,7 @@ const SearchBar = () => {
           className=" py-2 px-4  text-red-600 font-bold text-2xl"
           onClick={searchTMDBMovies}
         >
-          {/* {lang[langKey].search} */}
+          
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
       </div>

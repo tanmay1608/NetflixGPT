@@ -5,7 +5,6 @@ import { checkValidData } from "../utils/validate";
 import { auth } from "../utils/firebase";
 import { createUserWithEmailAndPassword , signInWithEmailAndPassword} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
-import { logDOM } from "@testing-library/react";
 import Spinner from "./Spinner";
 
 const Login = () => {
@@ -19,33 +18,29 @@ const Login = () => {
   const name = useRef(null);
 
   const handleButtonClick = () => {
-    setLoading(true)
-    const nameValue = isSignIn ? null : name.current.value;
+   
+    const nameValue = isSignIn ? null : name?.current?.value;
     const message = checkValidData(
-      email.current.value,
-      password.current.value,
+      email?.current?.value,
+      password?.current?.value,
       nameValue
     );
     setErrorMessage(message);
     if (message) return;
 
     if (!isSignIn) {
-      //Sign up
+      setLoading(true)
+      
       createUserWithEmailAndPassword(
         auth,
-        email.current.value,
-        password.current.value
+        email?.current?.value,
+        password?.current?.value
       )
         .then((userCredential) => {
-          // Signed up
-          console.log("Inside createUserWithEmailAndPassword")
-          const user = userCredential.user;
-          console.log(user);
+      
           setLoading(false);
           navigate("/browse");
-         
-          
-          // ...
+            
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -54,16 +49,17 @@ const Login = () => {
           setLoading(false);
         });
     } else {
-      //sign In
+      
+      setLoading(true)
 
       signInWithEmailAndPassword(auth, email.current.value, password.current.value)
   .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    console.log("Inside signInWithEmailAndPassword")
+    
+   
+   
     setLoading(false);
-    navigate("browse");
-    // ...
+    navigate("/browse");
+    
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -87,10 +83,7 @@ const Login = () => {
       
       <form
         onSubmit={(e) => {
-          //so, when we have a button inside form it calls
-          // onsubmit of form
-          // and if we dont do inside onSubmit it refereshes the page to avoid that we use
-          // e.preventDefault();
+         
           e.preventDefault();
         }}
         className="w-[325px] max-w-full p:4 bg-black sm:w-[375px] flex flex-col  absolute top-1/2 transform -translate-y-1/2 sm:p-6 rounded-lg text-white bg-opacity-85"
@@ -110,7 +103,7 @@ const Login = () => {
           ref={email}
           className={`mx-9 my-3 p-3 bg-gray-300 rounded-sm bg-opacity-20 `}
           type="text"
-          placeholder="Email or mobile number"
+          placeholder="Email"
         />
         <input
           ref={password}

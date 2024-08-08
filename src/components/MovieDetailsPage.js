@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import MainContainer from "./MainContainer";
 import { useParams } from "react-router-dom";
 import { API_OPTIONS } from "../utils/constants";
 import Header from "./Header";
@@ -7,11 +6,13 @@ import { useDispatch } from "react-redux";
 import { showMovieDetails } from "../store/configSlice";
 import { IMG_CDN_URL } from "../utils/constants";
 import Spinner from "./Spinner";
+import NotFound from "./NotFound";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const [video, setVideo] = useState(null);
+  const [fetchError, setFetchError] = useState(null);
 
   const dispatch = useDispatch();
   dispatch(showMovieDetails(true));
@@ -22,11 +23,15 @@ const MovieDetailsPage = () => {
         "https://api.themoviedb.org/3/movie/" + movieId + "?language=en-US",
         API_OPTIONS
       );
+      
+     
+      if(!data.ok) throw new Error(`HTTP error! status: ${data.status}`)
       const json = await data.json();
-      console.log("Movies YESSS", json);
+     
       setMovie(json);
     } catch (error) {
-      console.log(error);
+     
+      setFetchError(error);
     }
   };
 
@@ -36,10 +41,13 @@ const MovieDetailsPage = () => {
         "https://api.themoviedb.org/3/movie/" + movieId + "/videos?",
         API_OPTIONS
       );
-      const json = await data.json();
-      console.log(json);
 
-      const filterData = json.results.filter(
+    
+       if(!data.ok) throw new Error(`HTTP error! status: ${data.status}`)
+      const json = await data.json();
+      
+
+      const filterData = json?.results?.filter(
         (video) =>
           video.type === "Trailer" ||
           video.type === "Official Trailer" ||
@@ -50,21 +58,24 @@ const MovieDetailsPage = () => {
 
       console.log(filterData);
 
-      setVideo(json.results[0]);
+      setVideo(json?.results?.[0]);
     } catch (error) {
-      console.log(error);
+      setFetchError(error)
     }
   };
 
   useEffect(() => {
     fetchMovies();
     fetchMovieVideo();
+    
+   
 
     return () => {
       dispatch(showMovieDetails(false));
     };
   }, []);
 
+  if(fetchError !==null) return <NotFound />
   if(movie==null) return (<div className="flex justify-center items-center h-screen w-screen bg-black">
     <Spinner/>
   </div>)
@@ -72,7 +83,7 @@ const MovieDetailsPage = () => {
   return (
     <div className=" h-screen flex ">
       <Header />
-      {/*Mobile backgrounf  */}
+      {/*Mobile background  */}
       <div className="sm:hidden w-full  bg-black relative">
         <img
           className="w-80 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "
@@ -83,7 +94,7 @@ const MovieDetailsPage = () => {
 <div className="absolute bottom-0   w-full flex justify-center  sm:p-20 md:p-16 ">
             
               <div className="flex  flex-wrap p-4">
-                {movie?.genres.map((genre) => (
+                {movie?.genres?.map((genre) => (
                   <p
                     key={genre?.id}
                     className="rounded-full m-2  px-4 py-2  bg-gray-800 bg-opacity-50  text-white"

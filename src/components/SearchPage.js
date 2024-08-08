@@ -1,7 +1,7 @@
 import React from 'react'
 import SearchBar from './SearchBar'
 import MovieSuggestions from './MovieSuggestions'
-import {BG_URL} from "../utils/constants"
+
 
 
 const SearchPage = () => {

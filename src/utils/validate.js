@@ -1,14 +1,16 @@
+import { validateEmail } from "./validateEmail";
+import { validatePassword } from "./validatePassword";
+import { validateName } from "./validateName";
 
-export const checkValidData=(email,password,name)=>{
-   
-       const isEmailValid=/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/.test(email);
-   if(!isEmailValid) return "Email is Invalid"
-  const isPasswordValid=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(password);
-  if(!isPasswordValid) return "Password is Invalid"
-  if(name === null) return null;
-  const isNameValid=/^[a-zA-Z\s-]+$/.test(name);
-  if(!isNameValid) return "Name is Invalid"
+export const checkValidData = (email, password, name) => {
+  const isEmailValid = validateEmail(email);
+  if (isEmailValid !== null) return isEmailValid;
 
-   return null;
-}
+  const isPasswordValid = validatePassword(password);
+  if (isPasswordValid !== null) return isPasswordValid;
 
+  const isNameValid = validateName(name);
+  if (isNameValid !== null) return isNameValid;
+
+  return null;
+};

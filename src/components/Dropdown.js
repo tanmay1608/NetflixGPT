@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {useSelector,useDispatch} from "react-redux";
 import lang from "../utils/languageConstants";
 import { SUPPORTED_LANGUAGES } from "../utils/constants";
-import { changeLanguage, toggleDropdown } from "../store/configSlice";
+import { changeLanguage} from "../store/configSlice";
 
 const Dropdown = () => {
 
@@ -31,7 +31,7 @@ const Dropdown = () => {
     <div className='bg-gray-800 bg-opacity-50 text-white fixed z-50  right-0 bottom-16 md:top-16 mr-5 mt-2 h-32 w-32 flex justify-center rounded-md shadow-lg'>
       <ul>
         
-        <li className='p-2 cursor-pointer border-b-2 border-white text-center' onClick={handleSignOut}>{lang[langKey].signOut}</li>
+        <li className='p-2 cursor-pointer border-b-2 border-white text-center' onClick={handleSignOut}>{lang[langKey]?.signOut}</li>
         <li className='p-2 cursor-pointer border-b-2 border-white text-center'>
         <div className="bg-gray-700 px-2 rounded-full ">
               <select
@@ -39,10 +39,10 @@ const Dropdown = () => {
               value={langKey}
               onChange={handleLanguageChange}
             >
-              {SUPPORTED_LANGUAGES.map((language) => {
+              {SUPPORTED_LANGUAGES?.map((language) => {
                 return (
-                  <option key={language.identifier} value={language.identifier}>
-                    {language.name}
+                  <option key={language?.identifier} value={language?.identifier}>
+                    {language?.name}
                   </option>
                 );
               })}

@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import Dropdown from "./Dropdown";
 import Footer from './Footer'
 
+
 const Browse = () =>{
 
   const showGPTSearch=useSelector((store)=> store.gpt?.showGPTSearch);
@@ -18,10 +19,14 @@ const Browse = () =>{
  
   
 
+  
   useNowplayingMovies();
   usePopularMovies();
   useTopRatedMovies();
   useUpcomingMovies();
+
+  
+  
   
 
   return (

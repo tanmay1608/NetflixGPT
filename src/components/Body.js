@@ -12,6 +12,7 @@ import PrivateLoginRoute from "./PrivateLoginRoute";
 import { clearMovieSlice } from "../store/moviesSlice";
 import { clearConfigSlice } from "../store/configSlice";
 import MovieDetailsPage from "./MovieDetailsPage";
+import NotFound from "./NotFound";
 
 const Body = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const Body = () => {
           element: <Login />,
         },
       ],
+     
     },
     {
       path: "/browse",
@@ -36,17 +38,22 @@ const Body = () => {
           element: <Browse />,
         },
       ],
+     
     },
     {
       path: "/browse/:movieId",
-      element: <PrivateBrowseRoute/>,
-      children:[
+      element: <PrivateBrowseRoute />,
+      children: [
         {
           path: "/browse/:movieId",
-      element: <MovieDetailsPage/>
-        }
-      ]
-    },
+          element: <MovieDetailsPage />,
+        },
+      ],
+      
+    },{
+      path:"*",
+      element:<NotFound/>
+    }
   ]);
 
   const storeUserInfo = ({ uid, email }) => {
@@ -63,41 +70,30 @@ const Body = () => {
   };
 
   useEffect(() => {
-    //so we only want to add this event listener only once
-    //and we are using onAuthStateChanged at root level
-
-    //so method is like event listener whenevr there is a change in authState it is called
-    // like when when user signIn, sign Out, sign Up
-    //onAuthStateChanged returns an unsubscribe function
+  
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log("Inside onAuthStateChanged", user);
+        
 
         const { uid, email, displayName } = user;
 
         dispatch(addUser({ uid: uid, email: email, displayName: displayName }));
         storeUserInfo(user);
 
-        //redirect user to browse page
-        //for navigation we have navigation hook
-        //  navigate("/browse");
+      
       } else {
-        console.log("Inisde else");
-
-        // storeUserInfo(null);
-        // User is signed out
+        
+       
         dispatch(removeUser());
         clearUserInfo();
         dispatch(clearMovieSlice());
         dispatch(clearConfigSlice());
-        //if user sign out navigate to main page
-        // navigate("/");
+       
       }
     });
 
     //Unsubscribe when unmounts
-    return ()=> unsubscribe();
-
+    return () => unsubscribe();
   }, []);
 
   return <RouterProvider router={appRouter}></RouterProvider>;

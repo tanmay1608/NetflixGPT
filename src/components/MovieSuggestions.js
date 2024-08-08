@@ -7,10 +7,10 @@ const MovieSuggestions = () => {
     const loading=useSelector((store)=>store.config?.loading)
 
     if(loading) return <Spinner/>
-    if(movies === null || movies?.movieResult === null) return null;
+    if(movies?.movieResult === null) return null;
 
     
-    if(movies?.movieResult.length ===0) return <h1 className='text-white'>No Result found......</h1>
+    if(movies?.movieResult?.length === 0) return <h1 className='text-white'>No Result found......</h1>
     
     
  return (

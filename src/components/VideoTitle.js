@@ -14,12 +14,12 @@ const VideoTitle = ({title,overview,id}) => {
       <div className='flex '>
         <Link to={"/browse/"+id}>
         <button className='bg-white text-black font-bold py-2 px-4  mr-2 rounded-md mb-2 hover:bg-opacity-80 flex justify-center items-center'>{
-            <FontAwesomeIcon className='pr-2 text-xl ' icon={faPlay} />} {lang[langKey].play}</button>
+            <FontAwesomeIcon className='pr-2 text-xl ' icon={faPlay} />} {lang[langKey]?.play}</button>
         </Link>
        
        <Link to={"/browse/"+id}>
        <button className='bg-gray-400 text-white font-bold py-2 px-4 ml-2 rounded-md mb-2 bg-opacity-80 hover:bg-opacity-50 flex justify-center items-center'>
-       {<FontAwesomeIcon className='pr-2 text-xl' icon={faCircleInfo} />}{lang[langKey].moreInfo}</button>
+       {<FontAwesomeIcon className='pr-2 text-xl' icon={faCircleInfo} />}{lang[langKey]?.moreInfo}</button>
        </Link>
        
       </div>

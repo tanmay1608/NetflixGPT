@@ -7,7 +7,7 @@ const configSlice=createSlice({
         loading:false,
         showDropdown:false,
         movieDetails:false,
-        searchSection:false
+        searchSection:false,
     },
     reducers:{
         changeLanguage:(state,action)=>{

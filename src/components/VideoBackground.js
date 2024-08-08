@@ -7,7 +7,7 @@ import lang from "../utils/languageConstants";
 import { Link } from "react-router-dom";
 
 const VideoBackground = ({ movieId, poster_path }) => {
-  //  const [trailerKey,setTrailerKey]=useState(null);
+  
   const trailerKey = useSelector((store) => store.movies?.trailerVideo);
   const langKey = useSelector((store) => store.config?.lang);
   useMovieTrailer(movieId);
@@ -40,14 +40,14 @@ const VideoBackground = ({ movieId, poster_path }) => {
           <Link to={"/browse/" + movieId}>
             <button className="bg-white text-black font-bold py-2 px-4  mr-2 rounded-md mb-2 hover:bg-opacity-80 flex justify-center items-center">
               {<FontAwesomeIcon className="pr-2 text-xl " icon={faPlay} />}{" "}
-              {lang[langKey].play}
+              {lang[langKey]?.play}
             </button>
           </Link>
 
           <Link to={"/browse/" + movieId}>
             <button className="bg-gray-400 text-white font-bold py-2 px-4 ml-2 rounded-md mb-2 bg-opacity-80 hover:bg-opacity-50 flex justify-center items-center ">
               {<FontAwesomeIcon className="pr-2 text-xl" icon={faCircleInfo} />}
-              {lang[langKey].moreInfo}
+              {lang[langKey]?.moreInfo}
             </button>
           </Link>
         </div>
