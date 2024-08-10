@@ -27,7 +27,6 @@ const Body = () => {
           element: <Login />,
         },
       ],
-     
     },
     {
       path: "/browse",
@@ -38,7 +37,6 @@ const Body = () => {
           element: <Browse />,
         },
       ],
-     
     },
     {
       path: "/browse/:movieId",
@@ -49,11 +47,11 @@ const Body = () => {
           element: <MovieDetailsPage />,
         },
       ],
-      
-    },{
-      path:"*",
-      element:<NotFound/>
-    }
+    },
+    {
+      path: "*",
+      element: <NotFound />,
+    },
   ]);
 
   const storeUserInfo = ({ uid, email }) => {
@@ -70,25 +68,17 @@ const Body = () => {
   };
 
   useEffect(() => {
-  
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        
-
         const { uid, email, displayName } = user;
 
         dispatch(addUser({ uid: uid, email: email, displayName: displayName }));
         storeUserInfo(user);
-
-      
       } else {
-        
-       
         dispatch(removeUser());
         clearUserInfo();
         dispatch(clearMovieSlice());
         dispatch(clearConfigSlice());
-       
       }
     });
 

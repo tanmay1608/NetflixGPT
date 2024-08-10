@@ -38,7 +38,7 @@ const movieSlice = createSlice({
       state.searchedMovies.movieResult = null;
     },
     clearMovieSlice: (state) => {
-    const newState= {
+      const newState = {
         nowPlayingMovies: null,
         trailerVideo: null,
         popularMovies: null,
@@ -48,7 +48,7 @@ const movieSlice = createSlice({
           movieName: null,
           movieResult: null,
         },
-      }
+      };
 
       return newState;
     },

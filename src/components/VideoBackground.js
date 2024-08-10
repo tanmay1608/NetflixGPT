@@ -7,7 +7,6 @@ import lang from "../utils/languageConstants";
 import { Link } from "react-router-dom";
 
 const VideoBackground = ({ movieId, poster_path }) => {
-  
   const trailerKey = useSelector((store) => store.movies?.trailerVideo);
   const langKey = useSelector((store) => store.config?.lang);
   useMovieTrailer(movieId);

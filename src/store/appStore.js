@@ -3,15 +3,18 @@ import userReducer from "./userSlice";
 import moviesReducer from "./moviesSlice";
 import gptReducer from "./gptSlice";
 import configReducer from "./configSlice";
-const appStore = configureStore({
+import errorReducer from "./errorSlice";
+import firebaseReducer from "./firebaseSlice";
 
-    reducer:{
-        user:userReducer,
-        movies:moviesReducer,
-        gpt:gptReducer,
-        config:configReducer,
-        
-    }
+const appStore = configureStore({
+  reducer: {
+    user: userReducer,
+    movies: moviesReducer,
+    gpt: gptReducer,
+    config: configReducer,
+    error: errorReducer,
+    firebase: firebaseReducer,
+  },
 });
 
-export default appStore ;
+export default appStore;

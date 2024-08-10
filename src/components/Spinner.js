@@ -20,7 +20,6 @@ const Spinner = () => {
             fill="currentFill"
           />
         </svg>
-        
       </div>
     </div>
   );

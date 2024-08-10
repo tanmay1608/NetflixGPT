@@ -8,16 +8,26 @@ const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer "+process.env.REACT_APP_TMDB_KEY,
+    Authorization: "Bearer " + process.env.REACT_APP_TMDB_KEY,
   },
 };
 
 const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500";
 
-const SUPPORTED_LANGUAGES=[{
-  identifier:"en",name:"English"
-},
-{identifier:"hindi",name:"Hindi"}];
- const OPENAI_KEY="sk-S7ziQQYAgEAZtoM2d22gw5zcV80cg7Rk4SutjOmzQ7T3BlbkFJQyxl2q4WTc6cC-_eRlvww53h6CfAsgU6TJsASEUSoA";
-export { LOGO_URL, BG_URL, API_OPTIONS, IMG_CDN_URL ,SUPPORTED_LANGUAGES,OPENAI_KEY};
+const SUPPORTED_LANGUAGES = [
+  {
+    identifier: "en",
+    name: "English",
+  },
+  { identifier: "hindi", name: "Hindi" },
+];
+const OPENAI_KEY =
+  "sk-S7ziQQYAgEAZtoM2d22gw5zcV80cg7Rk4SutjOmzQ7T3BlbkFJQyxl2q4WTc6cC-_eRlvww53h6CfAsgU6TJsASEUSoA";
+export {
+  LOGO_URL,
+  BG_URL,
+  API_OPTIONS,
+  IMG_CDN_URL,
+  SUPPORTED_LANGUAGES,
+  OPENAI_KEY,
+};

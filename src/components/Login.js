@@ -3,22 +3,24 @@ import { useState, useRef } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
 import { auth } from "../utils/firebase";
-import { createUserWithEmailAndPassword , signInWithEmailAndPassword} from "firebase/auth";
-import {useNavigate} from "react-router-dom";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import Spinner from "./Spinner";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [loading,setLoading]=useState(false);
-  const navigate=useNavigate();
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
 
   const handleButtonClick = () => {
-   
     const nameValue = isSignIn ? null : name?.current?.value;
     const message = checkValidData(
       email?.current?.value,
@@ -29,18 +31,16 @@ const Login = () => {
     if (message) return;
 
     if (!isSignIn) {
-      setLoading(true)
-      
+      setLoading(true);
+
       createUserWithEmailAndPassword(
         auth,
         email?.current?.value,
         password?.current?.value
       )
         .then((userCredential) => {
-      
           setLoading(false);
           navigate("/browse");
-            
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -49,24 +49,23 @@ const Login = () => {
           setLoading(false);
         });
     } else {
-      
-      setLoading(true)
+      setLoading(true);
 
-      signInWithEmailAndPassword(auth, email.current.value, password.current.value)
-  .then((userCredential) => {
-    
-   
-   
-    setLoading(false);
-    navigate("/browse");
-    
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    setErrorMessage(errorCode+": "+errorMessage);
-    setLoading(false);
-  });
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          setLoading(false);
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + ": " + errorMessage);
+          setLoading(false);
+        });
     }
   };
 
@@ -80,10 +79,9 @@ const Login = () => {
           alt="logo"
         ></img>
       </div>
-      
+
       <form
         onSubmit={(e) => {
-         
           e.preventDefault();
         }}
         className="w-[325px] max-w-full p:4 bg-black sm:w-[375px] flex flex-col  absolute top-1/2 transform -translate-y-1/2 sm:p-6 rounded-lg text-white bg-opacity-85"
@@ -114,9 +112,7 @@ const Login = () => {
         {errorMessage !== null && (
           <p className="text-red-600  mx-9 my-3 text-center">{errorMessage}</p>
         )}
-        {
-          (loading && errorMessage==null )  && <Spinner/>
-        }
+        {loading && errorMessage == null && <Spinner />}
         <button
           className=" p-4 mx-9 my-3 bg-red-600 font-bold rounded-sm"
           onClick={handleButtonClick}

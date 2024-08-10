@@ -7,18 +7,14 @@ const SecondaryContainer = () => {
   const movies = useSelector((store) => store.movies);
   const langKey = useSelector((store) => store.config?.lang);
 
-  
-  const allMoviesLoaded = (
-    movies.upcomingMovies?.length > 0 &&
-    movies.nowPlayingMovies?.length > 0 &&
-    movies.topRatedMovies?.length > 0 &&
-    movies.popularMovies?.length > 0
-  );
-  
+  const allMoviesLoaded =
+    movies?.upcomingMovies?.length > 0 &&
+    movies?.nowPlayingMovies?.length > 0 &&
+    movies?.topRatedMovies?.length > 0 &&
+    movies?.popularMovies?.length > 0;
 
   return (
-    allMoviesLoaded &&
-     (
+    allMoviesLoaded && (
       <div className="bg-black">
         <div className="-mt-12  md:-mt-30  lg:-mt-60 pl-12 relative z-20">
           <MoviesList
