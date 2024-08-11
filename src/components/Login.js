@@ -127,7 +127,7 @@ const Login = () => {
           }}
         >
           <span className="text-gray-400 cursor-pointer ">
-            {isSignIn ? "New to netflix?" : "Already registered?"}
+            {isSignIn ? "New to watchflow?" : "Already registered?"}
           </span>{" "}
           {isSignIn ? " Sign Up Now" : " Sign In Now"}
         </p>

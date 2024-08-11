@@ -40,7 +40,7 @@ const Header = () => {
     md:flex-row
     "
     >
-      <img className="w-40 " src={LOGO_URL} alt="logo"></img>
+      <img className="w-40 h-14 " src={LOGO_URL} alt="logo"></img>
 
       {user && !showMovieDetails && (
         <div className="hidden md:flex  justify-end items-center ">
